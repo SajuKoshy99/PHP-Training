@@ -1,0 +1,60 @@
+<h3>{{$newName}}</h3>
+    <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="{{ route('about') }}">About Us</a></li>
+        <li><a href="{{ route('contact')}}">Contact Us</a></li>
+    </ul>
+
+
+
+<!--@switch($status)
+       @case(1)
+           <h2>Status is 1</h2>
+           @break
+       @case(2)
+           <h2>Status is 2</h2>
+           @break
+       @default
+           <h2>Status is default</h2>
+   @endswitch-->
+    <!--@isset($record)
+         <h3>Color getting</h3>
+    @endisset
+        
+    @empty($record)
+        <h3>Color Empty</h3>
+        
+    @endempty-->
+    <!--@if($age ==30)
+        <h2>You are allowed</h2>
+    @else 
+        <h2>You are not allowed</h2>
+    @endif
+
+    @unless ($age == 30)
+          <h2>You are not allowed</h2>
+    @endunless-->
+    
+    <!--<h3>Today is {{ date('d-M-Y') }}</h3>
+    <h3>Today is {{ time () }}</h3>-->
+
+<ul>
+        <li><a href="">Home</a></li>
+        <li><a href="{{ route('about') }}">About Us</a></li>
+        <li><a href="{{ route('contact')}}">Contact Us</a></li>
+    </ul>
+
+@for ($i = 1; $i < 10; $i++)
+        <h3>The value is {{ $i}} </h3>
+    @endfor
+//$colors = ['red','yellow','pink','blue','green'];
+@foreach ($colors as $color)
+        <h3 @if($loop->first) class="first" @elseif($loop->last) class="last" @endif >{{ strtoupper($color) }}</h3> 
+    @endforeach
+
+/*$age=35;
+        $record = ['red' ];
+        $status =1;
+        $newName = strtoupper($name);*/
+
+$users = User::active()->orderBy('name','desc')->get();
