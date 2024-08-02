@@ -11,6 +11,7 @@
         <ul>
           <li>Address Line 1 : {{ $user->address->address_line_1 }}</li>
           <li>City : {{ $user->address->city }}</li>
+          <li>Phone : </li>
         </ul>
 </div>
 @endsection
