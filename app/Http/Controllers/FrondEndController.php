@@ -16,7 +16,7 @@ class FrondEndController extends Controller
         // $users = User::WhereIn('user_id',[43,23])->get();
         //$users = User::Where('status',1)->get();
         //return $user;
-        $users = User::withTrashed()->active()->latest()->paginate(10);
+        $users = User::withCount('orders')->withTrashed()->active()->latest()->paginate(10);
         return view('home',compact('users'));    
         //session()->put('user_name','Saju Kurian');
         //session()->put('user_id',45);
@@ -69,7 +69,7 @@ class FrondEndController extends Controller
         return view('users.edit',compact('user'));
     }
     public function view($userId){
-        $user = User::find(decrypt($userId));
+        $user = User::has('address')->find(decrypt($userId));
         return view('users.view',compact('user'));
     }
     public function update(){

@@ -15,6 +15,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Orders</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
@@ -25,6 +26,7 @@
                 <th scope="row">{{ $users->firstItem() + $loop->index}}</th>
                 <td>{{ $user->name}}</td>
                 <td>{{ $user->email}}</td>
+                <td>{{ $user->orders_count}}</td>
                 <td>@if ($user->trashed()) Trashed @else Active @endif</td>
                 <td>
                   @if ($user->trashed()) <a href="{{ route('activate.user',encrypt($user->user_id))}}" class="btn btn-success">Activate</a> @endif
