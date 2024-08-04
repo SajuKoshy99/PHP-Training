@@ -6,12 +6,18 @@
        @csrf
         <div class="form-group">
           <label>Name <!--- {{ session()->get('user_name') }}--></label>
-          <input type="text" name="name" class="form-control"  placeholder="Enter name">
+          <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  placeholder="Enter name">
+          @error('name')
+              <p class="alert alert-danger">{{ $message }}</p>
+          @enderror
           <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
           <label>Email</label>
           <input type="email" name="email" class="form-control"  placeholder="Enter email">
+          @error('email')
+              <p class="alert alert-danger">{{ $message }}</p>
+          @enderror
         </div>
         <div class="form-group">
           <label>Date Of Birth</label>

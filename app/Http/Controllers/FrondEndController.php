@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\UserCreatedMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 
 class FrondEndController extends Controller
@@ -33,33 +35,19 @@ class FrondEndController extends Controller
         return view('users.create');
     }
     public function save(){
-        // $name = request('name');
-        // $email = request('email');
-        // $dob = request('date_of_birth');
-        // $status = request('status');
-        
-        User::create([
+
+        request()->validate(['name' => 'required|min:10', 'email' => 'required']);
+
+        $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'date_of_birth' => request('date_of_birth'),
             'status' => request('status'),
         ]);
 
-        // $user = User::firstOrCreate([
-        //     'email' => request('email')
-        // ],[
-        //      'name' => request('name'),
-        //      'date_of_birth' => request('date_of_birth'),
-        //      'status' => request('status'),
-        // ]);
-
-        // $user = User::updateOrCreate([
-        //     'email' => request('email')
-        // ],[
-        //      'name' => request('name'),
-        //      'date_of_birth' => request('date_of_birth'),
-        //      'status' => request('status'),
-        // ]);
+        Mail::to($user->email)
+            ->cc('abc@gmail.com')
+            ->bcc('xyz@gmail.com')->send(new UserCreatedMail($user));
 
         return redirect()->route('home')
                ->with('message','User Created Successfully !!!');
